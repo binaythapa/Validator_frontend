@@ -7,11 +7,15 @@ import {
 import ComparisonTable from "./comparison Table/comparison_table";
 import { header_format } from "./comparison Table/comparison_json";
 import { getAPIlist } from "../../../api/api";
-import { returnKeyWithMinComp } from "../../../components/functions/functions";
+import {
+  returnKeyWithMaxComp,
+  returnKeyWithMinComp,
+} from "../../../components/functions/functions";
 
 const Comparison = () => {
   const [listFromAPI, setlistFromAPI] = useState([]);
   const [minimumKey, setMinimumKey] = useState("");
+  const [maximumKey, setMaximumKey] = useState("");
   const [checkboxes, setCheckboxes] = useState([]);
 
   useEffect(() => {
@@ -19,7 +23,9 @@ const Comparison = () => {
     let newAPIlist = getAPIlist();
     setlistFromAPI(newAPIlist);
     let minKey = returnKeyWithMinComp(newAPIlist);
+    let maxKey = returnKeyWithMaxComp(newAPIlist);
     setMinimumKey(minKey);
+    setMaximumKey(maxKey);
 
     //test
   }, []);
@@ -100,8 +106,11 @@ const Comparison = () => {
         {" "}
         {/* Inner Comparisons  */}
         <form onSubmit={handleSubmit}>
+          <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
+            Client Name: ABS Observability
+          </div>
           <Grid grid12>
-            <div className="col-span-1 my-6">
+            <div className="col-span-1 my-3">
               <div className="font-medium mt-[58px] ml-3">Join Key</div>
               {minimumKey &&
                 listFromAPI[minimumKey].map((c, index) => (
@@ -130,6 +139,26 @@ const Comparison = () => {
                   handleFormChange={handleFormChange}
                 />
               ))}
+
+            <div className="col-span-3 my-6">
+              <div className="text-lg font-medium text-center mt-11">
+                DataType
+              </div>
+              {maximumKey &&
+                listFromAPI[maximumKey]?.map((c, index) => (
+                  <div key={index}>
+                    <select
+                      id="datatype"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
+                    >
+                      <option selected>Choose a Datatype</option>
+                      <option value="String">String</option>
+                      <option value="long">Long</option>
+                      <option value="float">Float</option>
+                    </select>
+                  </div>
+                ))}
+            </div>
           </Grid>
           <div className="flex justify-center">
             <button

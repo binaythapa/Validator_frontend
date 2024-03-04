@@ -44,7 +44,7 @@ const ComparisonTable = ({
   };
 
   return (
-    <div className="md:col-span-4 my-6">
+    <div className="md:col-span-4 my-3">
       <div className="my-2 mb-4 text-center font-bold text-[1.4rem]">
         {listKey}
       </div>
