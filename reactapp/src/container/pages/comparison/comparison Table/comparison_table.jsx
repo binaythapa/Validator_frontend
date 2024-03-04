@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import DragAndDrop from "../../../../assets/icons/dragAndDrop";
 
 const ComparisonTable = ({

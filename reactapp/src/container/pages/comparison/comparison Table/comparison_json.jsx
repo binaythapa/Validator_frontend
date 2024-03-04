@@ -1,5 +1,5 @@
 export const api_list = {
-  pepco_list: [
+  Pepco: [
     {
       header_name: "Col1",
       modified_name: "",
@@ -32,7 +32,7 @@ export const api_list = {
     },
   ],
 
-  pound_land: [
+  Pound_Land: [
     {
       header_name: "Column1",
       modified_name: "",
@@ -73,8 +73,8 @@ export const api_list = {
 
 export const header_format = (
   <div className="grid grid-cols-10 gap-2 font-medium">
-    <div className="col-span-4 pl-2">Header</div>
-    <div className="col-span-6 pl-2">Modification (Input)</div>
+    <div className="col-span-4 pl-8">Header</div>
+    <div className="col-span-6 pl-5">Modification (Input)</div>
     {/* <div className="col-span-2 text-center">Primary Key</div> */}
   </div>
 );

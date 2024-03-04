@@ -102,7 +102,7 @@ const Comparison = () => {
         <form onSubmit={handleSubmit}>
           <Grid grid12>
             <div className="col-span-1 my-6">
-              <div className="font-medium mt-[58px]">Join Key</div>
+              <div className="font-medium mt-[58px] ml-3">Join Key</div>
               {minimumKey &&
                 listFromAPI[minimumKey].map((c, index) => (
                   <div
