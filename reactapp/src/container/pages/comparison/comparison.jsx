@@ -6,11 +6,12 @@ import {
 } from "../../../components/tailwind/tailwind_variable";
 import ComparisonTable from "./comparison Table/comparison_table";
 import { client_name, header_format } from "./comparison Table/comparison_json";
-import { getAPIlist } from "../../../api/api";
+// import { getAPIlist } from "../../../api/api";
 import {
   returnKeyWithMaxComp,
   returnKeyWithMinComp,
 } from "../../../components/functions/functions";
+import { getAPIlist } from "../../../utils/api/api/api";
 
 const Comparison = () => {
   const [clientName, setClientName] = useState("");
@@ -21,14 +22,34 @@ const Comparison = () => {
 
   useEffect(() => {
     //LATER use it as api  (async await)
+    let clientName = "OBS Observality";
+    const fetchData = async () => {
+      console.log("fetchdata");
+      try {
+        let response = await getAPIlist({ clientName: clientName });
+        if (response) {
+          console.log(response);
+          setlistFromAPI(response.api_list);
+          setClientName(response.client_name);
 
-    let newAPIlist = getAPIlist();
-    setlistFromAPI(newAPIlist);
-    setClientName(client_name);
-    let minKey = returnKeyWithMinComp(newAPIlist);
-    let maxKey = returnKeyWithMaxComp(newAPIlist);
-    setMinimumKey(minKey);
-    setMaximumKey(maxKey);
+          let minKey = returnKeyWithMinComp(response.api_list);
+          let maxKey = returnKeyWithMaxComp(response.api_list);
+          setMinimumKey(minKey);
+          setMaximumKey(maxKey);
+        }
+      } catch (error) {
+        console.log("Error");
+      }
+    };
+    fetchData();
+    // let newAPIlist = getAPIlist("OBS Observality");
+
+    // setlistFromAPI(newAPIlist);
+    // setClientName(client_name);
+    // let minKey = returnKeyWithMinComp(newAPIlist);
+    // let maxKey = returnKeyWithMaxComp(newAPIlist);
+    // setMinimumKey(minKey);
+    // setMaximumKey(maxKey);
 
     //test
   }, []);

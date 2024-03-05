@@ -94,7 +94,13 @@ class ClientAPIView(APIView):
             })
 
         # Return the transformed data as a response
-        return Response({
-            "client_name": client_name,
-            "api_list": api_list
-        })
+        if name_param:
+            return Response({
+                "client_name": client_name,
+                "api_list": api_list
+            })
+        else:
+            return Response({
+                "client_name": "All",
+                "api_list": api_list
+            })
