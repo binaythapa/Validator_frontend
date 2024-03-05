@@ -1,3 +1,5 @@
+export const client_name = "ABS Observability";
+
 export const api_list = {
   Pepco: [
     {
@@ -58,16 +60,6 @@ export const api_list = {
       modified_name: "",
       is_primary_key: false,
     },
-    // {
-    //   header_name: "Column6",
-    //   modified_name: "",
-    //   is_primary_key: false,
-    // },
-    // {
-    //   header_name: "Column7",
-    //   modified_name: "",
-    //   is_primary_key: false,
-    // },
   ],
 };
 

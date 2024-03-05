@@ -5,7 +5,7 @@ import {
   GridOffset,
 } from "../../../components/tailwind/tailwind_variable";
 import ComparisonTable from "./comparison Table/comparison_table";
-import { header_format } from "./comparison Table/comparison_json";
+import { client_name, header_format } from "./comparison Table/comparison_json";
 import { getAPIlist } from "../../../api/api";
 import {
   returnKeyWithMaxComp,
@@ -13,6 +13,7 @@ import {
 } from "../../../components/functions/functions";
 
 const Comparison = () => {
+  const [clientName, setClientName] = useState("");
   const [listFromAPI, setlistFromAPI] = useState([]);
   const [minimumKey, setMinimumKey] = useState("");
   const [maximumKey, setMaximumKey] = useState("");
@@ -20,8 +21,10 @@ const Comparison = () => {
 
   useEffect(() => {
     //LATER use it as api  (async await)
+
     let newAPIlist = getAPIlist();
     setlistFromAPI(newAPIlist);
+    setClientName(client_name);
     let minKey = returnKeyWithMinComp(newAPIlist);
     let maxKey = returnKeyWithMaxComp(newAPIlist);
     setMinimumKey(minKey);
@@ -107,7 +110,7 @@ const Comparison = () => {
         {/* Inner Comparisons  */}
         <form onSubmit={handleSubmit}>
           <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
-            Client Name: ABS Observability
+            Client Name: {clientName}
           </div>
           <Grid grid12>
             <div className="col-span-1 my-3">
@@ -149,7 +152,7 @@ const Comparison = () => {
                   <div key={index}>
                     <select
                       id="datatype"
-                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
+                      class="bg-gray-50 border border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
                     >
                       <option selected>Choose a Datatype</option>
                       <option value="String">String</option>

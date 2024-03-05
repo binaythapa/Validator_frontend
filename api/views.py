@@ -8,8 +8,10 @@ from django.views.generic import View
 
 
 
+# def index(request):
+#     return render(request, 'index.html')
 def index(request):
-    return render(request, 'index.html')
+    return JsonResponse({"key":"value"})
 
 
 class TestListCreateAPIView(generics.ListCreateAPIView):
