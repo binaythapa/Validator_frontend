@@ -6,8 +6,11 @@ from .views import index
 
 urlpatterns = [
     path('/tests/', TestListCreateAPIView.as_view(), name='test-list-create'),
-    path('/tests/<int:pk>/', TestRetrieveUpdateDestroyAPIView.as_view(), name='test-detail'),
+    path('/tests/<int:pk>/', TestRetrieveUpdateDestroyAPIView.as_view(),
+         name='test-detail'),
     path('/file_upload/', FileUploadView.as_view(), name='file_upload'),
-    path('/index/', index, name="index")
-    
+    path('/index/', index, name="index"),
+    path('/client/post/', ClientView.as_view(), name='clientView'),
+    path('/client/', ClientAPIView.as_view(), name='clientAPI')
+
 ]

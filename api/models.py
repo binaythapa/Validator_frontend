@@ -20,6 +20,9 @@ class File(models.Model):
 class Client(models.Model):
     client_name = models.CharField(max_length=200)
     client_file_name = models.CharField(max_length=200)
-    header_name = models.CharField(max_lenght=200)
-    modified_name = models.CharField(max_lenght=200)
+    header_name = models.CharField(max_length=200)
+    modified_name = models.CharField(max_length=200, blank=True)
     is_primary_key = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.client_name
