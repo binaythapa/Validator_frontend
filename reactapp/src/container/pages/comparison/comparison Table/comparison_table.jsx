@@ -8,15 +8,8 @@ const ComparisonTable = ({
   onDragData,
   handleFormChange,
 }) => {
-  // const [tableList, settableList] = useState([]);
   const currentlyDraggedComponent = useRef(0);
   const toBeReplacedComponent = useRef(0);
-
-  // useEffect(() => {
-  //   // Update DOM elements after state changes and component mounts
-
-  //   console.log(checkboxes);
-  // }, [checkboxes]);
 
   const handleSort = () => {
     let updatetFullList = { ...fullList };
