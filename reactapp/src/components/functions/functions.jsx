@@ -5,6 +5,7 @@ export const returnKeyWithMinComp = (json_data) => {
   Object.keys(json_data).map((key) => {
     arr_keys.push(key);
     arr_len.push(json_data[key].length);
+    return null;
   });
 
   let min_index = findMinValueIndexOfArray(arr_len);
@@ -19,6 +20,7 @@ export const returnKeyWithMaxComp = (json_data) => {
   Object.keys(json_data).map((key) => {
     arr_keys.push(key);
     arr_len.push(json_data[key].length);
+    return null;
   });
 
   let min_index = findMaxValueIndexOfArray(arr_len);

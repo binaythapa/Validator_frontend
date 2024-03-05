@@ -17,6 +17,6 @@ export const getAPIlist = async ({ clientName }) => {
       return resp.data;
     }
   } catch (error) {
-    console.log("error");
+    console.log(error);
   }
 };

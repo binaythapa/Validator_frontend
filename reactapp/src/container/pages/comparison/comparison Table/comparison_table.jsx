@@ -23,10 +23,10 @@ const ComparisonTable = ({
   };
 
   const onFormChange = (e, index, type) => {
-    type != "checkbox" && e.preventDefault();
+    type !== "checkbox" && e.preventDefault();
     let changingKeyName = e.target.name;
-    let updatedValue = type == "checkbox" ? e.target.checked : e.target.value;
-    console.log(changingKeyName, updatedValue);
+    let updatedValue = type === "checkbox" ? e.target.checked : e.target.value;
+    // console.log(changingKeyName, updatedValue);
     handleFormChange({
       listName: listKey,
       updatedValue,
@@ -88,20 +88,3 @@ const ComparisonTable = ({
 };
 
 export default ComparisonTable;
-
-{
-  /* second table  */
-}
-{
-  /* <div className="md:col-span-4">
-        <div className="grid grid-cols-12 gap-2"></div>
-      </div>
-      <div className="md:col-span-4">
-        <div className="grid grid-cols-12 gap-2"></div>
-      </div> */
-}
-{
-  /* <div className="md:col-span-4">
-        <div className="bg-orange-500">l</div>
-      </div> */
-}

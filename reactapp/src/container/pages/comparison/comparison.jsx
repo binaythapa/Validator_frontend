@@ -19,6 +19,7 @@ const Comparison = () => {
   const [minimumKey, setMinimumKey] = useState("");
   const [maximumKey, setMaximumKey] = useState("");
   const [checkboxes, setCheckboxes] = useState([]);
+  const [datatype, setDataType] = useState([]);
 
   useEffect(() => {
     //LATER use it as api  (async await)
@@ -38,35 +39,21 @@ const Comparison = () => {
           setMaximumKey(maxKey);
         }
       } catch (error) {
-        console.log("Error");
+        console.log(error);
       }
     };
     fetchData();
-    // let newAPIlist = getAPIlist("OBS Observality");
-
-    // setlistFromAPI(newAPIlist);
-    // setClientName(client_name);
-    // let minKey = returnKeyWithMinComp(newAPIlist);
-    // let maxKey = returnKeyWithMaxComp(newAPIlist);
-    // setMinimumKey(minKey);
-    // setMaximumKey(maxKey);
 
     //test
   }, []);
 
-  useEffect(() => {
-    console.log(checkboxes);
-  }, [checkboxes]);
-
-  useEffect(() => {
-    console.log(listFromAPI);
-  }, [listFromAPI]);
-
+  // handle dragged Data
   const handleDraggedData = (updatedList) => {
     // setlistFromAPI({ ...listFromAPI }, updatedList);
     setlistFromAPI(updatedList);
   };
 
+  //handle on Change form
   const handleFormChange = ({
     listName,
     updatedValue,
@@ -90,6 +77,7 @@ const Comparison = () => {
     });
   };
 
+  //handling Checkbox (JOIN KEY)
   const handleCheckBox = (e, index) => {
     let arr = [...checkboxes];
     let eventType = e.target.checked;
@@ -105,6 +93,42 @@ const Comparison = () => {
     setCheckboxes(arr);
   };
 
+  useEffect(() => {
+    console.log(datatype);
+  }, [datatype]);
+
+  //handle Select
+  const handleSelect = (e, index) => {
+    e.preventDefault();
+
+    setDataType((prevDataType) => {
+      let updatedDataType = [...prevDataType];
+
+      let previousIndex = false;
+      let repeatedIndex = null;
+
+      //using foreach to determine whether there is already a object which has same index, if yes replace else add
+      updatedDataType.forEach((obj, i) => {
+        if (obj.ind === index) {
+          previousIndex = true;
+          repeatedIndex = i;
+          return;
+        }
+      });
+
+      if (previousIndex === true && updatedDataType.length > repeatedIndex) {
+        updatedDataType[repeatedIndex].value = e.target.value;
+      } else {
+        updatedDataType.push({
+          ind: index,
+          value: e.target.value,
+        });
+      }
+
+      return updatedDataType;
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("submit");
@@ -112,6 +136,7 @@ const Comparison = () => {
 
     let apiList = { ...listFromAPI };
 
+    // from checkbox array, those index selected will be updated in apiList's is_primary_key as true
     checkboxes.map((ind) =>
       //make all is_primary_key as false
       Object.keys(apiList).map(
@@ -119,8 +144,20 @@ const Comparison = () => {
       )
     );
 
+    let dataTypeArr = [...datatype];
+    let sortedDataTypeArr = dataTypeArr.sort((a, b) => a.ind - b.ind);
+    // console.log(sortedDataTypeArr);
+
+    const updatedApiList = Object.keys(apiList).reduce((result, key) => {
+      result[key] = apiList[key].map((obj, index) => ({
+        ...obj,
+        datatype: sortedDataTypeArr[index]?.value || "", // Use optional chaining to avoid undefined value
+      }));
+      return result;
+    }, {});
+
     //we will make query for this next day
-    console.log("the update API LIST IS", apiList);
+    console.log("the update API LIST IS", updatedApiList);
   };
 
   return (
@@ -173,9 +210,12 @@ const Comparison = () => {
                   <div key={index}>
                     <select
                       id="datatype"
-                      class="bg-gray-50 border border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
+                      className="bg-gray-50 border border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
+                      onChange={(e) => handleSelect(e, index)}
                     >
-                      <option selected>Choose a Datatype</option>
+                      <option value="" disabled selected>
+                        Select an option
+                      </option>
                       <option value="String">String</option>
                       <option value="long">Long</option>
                       <option value="float">Float</option>
