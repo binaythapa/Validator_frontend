@@ -1,4 +1,5 @@
 import "./App.css";
+import AppRouter from "./config/appRouter/appRouter";
 // import tw from "twin.macro";
 // import tw from "twin.macro";
 import Comparison from "./container/pages/comparison/comparison";
@@ -7,9 +8,9 @@ import Comparison from "./container/pages/comparison/comparison";
 
 function App() {
   return (
-    <div>
-      <Comparison />
-    </div>
+    <>
+      <AppRouter />
+    </>
   );
 }
 
