@@ -22,17 +22,16 @@ const ComparisonTable = ({
     onDragData(updatetFullList);
   };
 
-  const onFormChange = (e, index, type) => {
-    type !== "checkbox" && e.preventDefault();
+  const onFormChange = (e, index) => {
+    e.preventDefault();
     let changingKeyName = e.target.name;
-    let updatedValue = type === "checkbox" ? e.target.checked : e.target.value;
+    let updatedValue = e.target.value;
     // console.log(changingKeyName, updatedValue);
     handleFormChange({
       listName: listKey,
       updatedValue,
       changingKeyName,
       index,
-      type,
     });
   };
 

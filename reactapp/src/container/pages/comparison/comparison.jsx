@@ -59,7 +59,6 @@ const Comparison = () => {
     updatedValue,
     index,
     changingKeyName,
-    // type,
   }) => {
     setlistFromAPI((prevState) => {
       if (!prevState || !prevState[listName]) {
@@ -151,7 +150,7 @@ const Comparison = () => {
     const updatedApiList = Object.keys(apiList).reduce((result, key) => {
       result[key] = apiList[key].map((obj, index) => ({
         ...obj,
-        datatype: sortedDataTypeArr[index]?.value || "", // Use optional chaining to avoid undefined value
+        datatype: sortedDataTypeArr[index]?.value || "",
       }));
       return result;
     }, {});
