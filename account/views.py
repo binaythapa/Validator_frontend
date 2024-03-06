@@ -11,6 +11,11 @@ from account.serializers import UserSerializer
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import JsonResponse
 
+
+# class MyTokenObtainPairView(TokenObtainPairView):
+#     serializer_class = MyTokenObtainPairSerializer
+
+
 @ensure_csrf_cookie
 @api_view(['POST'])
 def signup(request):
@@ -24,6 +29,7 @@ def signup(request):
         return Response({'token': token.key, 'user': serializer.data})
     return Response(serializer.errors, status=status.HTTP_200_OK)
 
+
 @ensure_csrf_cookie
 @api_view(['POST'])
 def login(request):
@@ -33,6 +39,7 @@ def login(request):
     token, created = Token.objects.get_or_create(user=user)
     serializer = UserSerializer(user)
     return Response({'token': token.key, 'user': serializer.data})
+
 
 @api_view(['GET'])
 @authentication_classes([SessionAuthentication, TokenAuthentication])

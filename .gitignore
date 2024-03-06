@@ -1,7 +1,19 @@
 env
-/account/__pycache__
-/account/migrations/__pycache__
-/migrations/__pycache__
-/api/__pycache__
-/api/migrations/__pycache__
-/djangoproj/__pycache__
+# /account/__pycache__
+# /account/migrations/__pycache__
+# /migrations/__pycache__
+# /api/__pycache__
+# /api/migrations/__pycache__
+# /djangoproj/__pycache__
+
+
+# .gitignore
+
+# Ignore compiled Python files
+__pycache__/
+
+# Ignore the virtual environment folder
+venv/
+
+# Ignore Django migration files
+migrations/

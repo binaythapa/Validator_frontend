@@ -31,7 +31,8 @@ class Client(models.Model):
 class Forminfo(models.Model):
     client_name = models.CharField(max_length=200)
     client_name_alias = models.CharField(max_length=200, blank=True)
-    datatype = models.CharField(max_length=200)
+    client_file_name = models.CharField(max_length=200, default="")
+    datatype = models.CharField(max_length=200, blank=True)
     header_name = models.CharField(max_length=200)
     is_primary_key = models.BooleanField(default=False)
 
