@@ -115,7 +115,7 @@ class FormAPIView(APIView):
         client_name_alias = data.get("client_name_alias", "")
 
         # Extract data for first Model
-        formInfo_data = data.get('apiList', {})
+        formInfo_data = data.get('api_list', {})
         print(formInfo_data)
 
         # Extract second data

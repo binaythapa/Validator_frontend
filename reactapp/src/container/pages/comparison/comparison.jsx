@@ -11,7 +11,7 @@ import {
   returnKeyWithMaxComp,
   returnKeyWithMinComp,
 } from "../../../components/functions/functions";
-import { getAPIlist } from "../../../utils/api/api/api";
+import { getAPIlist, postAPIList } from "../../../utils/api/api/api";
 
 const Comparison = () => {
   const [clientName, setClientName] = useState("");
@@ -168,6 +168,24 @@ const Comparison = () => {
       "query is",
       query
     );
+
+    let headers = {
+      client_name: client_name,
+      client_name_alias: client_name,
+      api_list: updatedApiList,
+      query: query,
+    };
+
+    postAPIList(headers)
+      .then((resp) => {
+        console.log(resp);
+        if (resp) {
+          console.log("SUCCESS IN POSTING DATA");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

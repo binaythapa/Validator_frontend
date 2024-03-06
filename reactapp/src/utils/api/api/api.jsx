@@ -18,5 +18,20 @@ export const getAPIlist = async ({ clientName }) => {
     }
   } catch (error) {
     console.log(error);
+    throw error;
+  }
+};
+
+export const postAPIList = async (headers) => {
+  try {
+    let resp = await axiosInstance.post("/form/", headers);
+
+    if (resp.status === 200) {
+      //data:{message: 'Successfully Processed Data'}
+      return resp.data;
+    }
+  } catch (error) {
+    console.log(error);
+    throw error;
   }
 };
