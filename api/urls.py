@@ -11,6 +11,7 @@ urlpatterns = [
     path('/file_upload/', FileUploadView.as_view(), name='file_upload'),
     path('/index/', index, name="index"),
     path('/client/post/', ClientView.as_view(), name='clientView'),
-    path('/client/', ClientAPIView.as_view(), name='clientAPI')
+    path('/client/', ClientAPIView.as_view(), name='clientAPI'),
+    path('/form/', FormAPIView.as_view(), name='form')
 
 ]

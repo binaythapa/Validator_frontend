@@ -26,3 +26,23 @@ class Client(models.Model):
 
     def __str__(self):
         return self.client_name
+
+
+class Forminfo(models.Model):
+    client_name = models.CharField(max_length=200)
+    client_name_alias = models.CharField(max_length=200, blank=True)
+    datatype = models.CharField(max_length=200)
+    header_name = models.CharField(max_length=200)
+    is_primary_key = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.client_name
+
+
+class Queryinfo(models.Model):
+    client_name = models.CharField(max_length=200)
+    client_name_alias = models.CharField(max_length=200, blank=True)
+    query = models.CharField(max_length=4000)
+
+    def __str__(self):
+        return self.client_name

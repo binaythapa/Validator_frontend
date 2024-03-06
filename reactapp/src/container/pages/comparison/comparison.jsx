@@ -155,8 +155,19 @@ const Comparison = () => {
       return result;
     }, {});
 
+    let query =
+      "Select t1.one as ship_no, t2.two as id from ALS_OBS t1 inner join OBS t2 on one.";
+
     //we will make query for this next day
-    console.log("the update API LIST IS", updatedApiList);
+    console.log(
+      "the update API LIST IS",
+      clientName,
+      updatedApiList,
+      "clientName ALIAS",
+      clientName,
+      "query is",
+      query
+    );
   };
 
   return (

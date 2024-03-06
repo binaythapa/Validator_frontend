@@ -3,9 +3,10 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Test, File, Client
-from .serializers import TestSerializer, ClientSerializer
+from .serializers import TestSerializer, ClientSerializer, FormInfoSerializer, QueryInfoSerializer
 from django.http import JsonResponse
 from django.views.generic import View
+from .models import Forminfo, Queryinfo
 
 
 # def index(request):
@@ -104,3 +105,49 @@ class ClientAPIView(APIView):
                 "client_name": "All",
                 "api_list": api_list
             })
+
+
+class FormAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        data = request.data
+
+        client_name = data.get("client_name", "")
+        client_name_alias = data.get("client_name_alias", "")
+
+        # Extract data for first Model
+        formInfo_data = data.get('apiList', {})
+        print(formInfo_data)
+
+        # Extract second data
+        query_info = data.get("query", "")
+
+        query_info_data = {
+            "client_name": client_name,
+            "client_name_alias": client_name_alias,
+            "query": query_info
+        }
+
+        query_serializer = QueryInfoSerializer(data=query_info_data)
+        if query_serializer.is_valid():
+            query_serializer.save()
+        else:
+            return Response(query_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({'message': 'Successfully Processed Data'})
+
+    def get(self, request,  *args, **kwargs):
+        # get all instance
+        formInfo_instance = Forminfo.objects.all()
+        queryInfo_instance = Queryinfo.objects.all()
+
+        # serialize data before sending as response
+        formInfo_serializer = FormInfoSerializer(formInfo_instance, many=True)
+        queryInfo_serializer = QueryInfoSerializer(
+            queryInfo_instance, many=True)
+
+        # send response
+        return Response({
+            "formInfo": formInfo_serializer.data,
+            "queryInfo": queryInfo_serializer.data
+
+        })

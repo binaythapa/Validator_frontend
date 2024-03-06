@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Test, Client
+from .models import Test, Client, Forminfo, Queryinfo
 
 
 class TestSerializer(serializers.ModelSerializer):
@@ -11,4 +11,16 @@ class TestSerializer(serializers.ModelSerializer):
 class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
+        fields = '__all__'
+
+
+class FormInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Forminfo
+        fields = '__all__'
+
+
+class QueryInfoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Queryinfo
         fields = '__all__'
