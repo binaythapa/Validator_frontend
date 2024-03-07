@@ -3,6 +3,7 @@ import AuthContext from "../../../config/providers/authProvider/authProvider";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
 import SignIn from "./signin/signin";
 import SignUp from "./signup/signup";
+import { singUp } from "../../../utils/api/api/authAPI";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -30,6 +31,20 @@ const Login = () => {
       });
   };
 
+  const handleSingUp = async (e) => {
+    e.preventDefault();
+    let username = e.target.username.value;
+    let password = e.target.password.value;
+    let confirmPassword = e.target.confirm_password.value;
+    console.log(username, password, confirmPassword);
+
+    let resp = await singUp({ username, password });
+    if (resp.status === 200) {
+      alert("Success, You may sign In");
+      setIsSignIn(true);
+    }
+  };
+
   const updateSignedState = (updatedState) => {
     setIsSignIn(updatedState);
   };
@@ -39,7 +54,7 @@ const Login = () => {
   ) : (
     <div className="min-h-screen flex items-center justify-center w-full bg-[#F3F4F6] ">
       <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-md border-2 border-gray-50">
-        <h1 className="text-2xl font-bold text-center mb-4 mt-2 w-[300px]">
+        <h1 className="text-2xl font-bold text-center mb-4 mt-2 w-[290px]">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
         {isSignIn ? (
@@ -49,7 +64,7 @@ const Login = () => {
           />
         ) : (
           <SignUp
-            handleSingUp={handleLogin}
+            handleSingUp={handleSingUp}
             handleSignedState={updateSignedState}
           />
         )}
