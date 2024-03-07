@@ -1,6 +1,19 @@
-const UploadComp = ({ isMain }) => {
+import React, { useState } from "react";
+
+const UploadComp = ({ isMain, handleTotalCard, index, handleFiletoState }) => {
+  const [isHover, setIsHover] = useState(index);
+
+  const handleFileChange = (e, ind) => {
+    let fileContent = e.target.files[0];
+    console.log(fileContent, "the index is", ind);
+    handleFiletoState({ index: ind, file: fileContent });
+  };
+
   let plusSVG = (
-    <div className="h-[180px] w-100 bg-gray-100 flex justify-center align-center rounded-xl cursor-pointer hover:bg-green-50 hover:border-2 transform hover:scale-[1.02] active:scale-[0.96] ease-in-out duration-200">
+    <div
+      onClick={handleTotalCard}
+      className=" h-[180px] w-100 bg-gray-100 flex justify-center align-center rounded-xl cursor-pointer hover:bg-green-50 hover:border-2 transform hover:scale-[1.02] active:scale-[0.96] ease-in-out duration-200"
+    >
       <svg
         className="w-24 h-24 text-gray-400 mt-8"
         fill="none"
@@ -17,9 +30,14 @@ const UploadComp = ({ isMain }) => {
     </div>
   );
 
-  let dropZone = (
+  let normalClassName = "border-gray-300";
+  let hoverClassName = "border-blue-400 scale-[1.03] shadow-md";
+
+  const dropZone = () => (
     <div
-      className="h-[180px] pt-2 text-center bg-gray-50 rounded-lg border-dashed border-2 border-gray-300 hover:border-blue-400 transition duration-300 ease-in-out transform hover:scale-[1.03] hover:shadow-md"
+      className={`h-[180px] pt-2 text-center bg-gray-50 rounded-lg border-dashed border-2 transition ease-in-out ${
+        isHover ? hoverClassName : normalClassName
+      }`}
       id="dropzone"
     >
       {" "}
@@ -43,23 +61,42 @@ const UploadComp = ({ isMain }) => {
           Drag and drop your files here
         </span>
       </label>
-      <input type="file" id="fileInput" className="scale-[0.6] opacity-0" />
+      {/* <input
+        type="file"
+        id="fileInput"
+        onChange={(e) => handleFileChange(e, indx)}
+        className="scale-[0.6] opacity-0"
+      /> */}
     </div>
   );
 
   return (
-    <div>
-      {/* <div className="w-full max-w-md p-9 bg-white rounded-lg shadow-lg"> */}
+    <>
       <h1 className="text-center text-lg sm:text-lg font-semibold mb-4 text-gray-800">
         {isMain === true ? "Click to Add" : "Drop Your File"}
       </h1>
 
-      {isMain === true ? plusSVG : dropZone}
-
-      <div className="mt-6 text-center" id="fileList"></div>
-      {/* </div> */}
-    </div>
+      <div className="relative">
+        {isMain === true ? plusSVG : dropZone(index)}
+        {isMain === false && (
+          <input
+            type="file"
+            id="filer"
+            name="filer"
+            onChange={(e) => handleFileChange(e, index)}
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
+            className="scale-y-[6] scale-x-[0.8] absolute top-[65px] left-[-30px] w-[260px] opacity-0 cursor-pointer upload-actual"
+          />
+        )}
+      </div>
+      <div className="mt-6 text-center"></div>
+    </>
   );
 };
 
 export default UploadComp;
+
+{
+  /* <div className={`upload-actual ${isHovered ? 'upload-hover-change' : ''}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}> */
+}

@@ -1,20 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  CardStr,
-  DoubleCard,
-  Grid,
-} from "../../../components/tailwind/tailwind_variable";
+import { Grid } from "../../../components/tailwind/tailwind_variable";
 import Container from "../../../layout/container/container";
 import UploadCard from "./uploadCards/uploadCard";
 
 const Upload = () => {
   const [cardArr, setCardArr] = useState([
-    { color: "red", addComp: false },
-    { color: "red", addComp: false },
-    { color: "red", addComp: false },
-    { color: "green", addComp: true },
+    { color: "red", addComp: false, file: null },
+    { color: "blue", addComp: false, file: null },
+    { color: "yellow", addComp: false, file: null },
+    { color: "green", addComp: true, file: null },
   ]);
+
+  useEffect(() => {
+    console.log(cardArr);
+  }, [cardArr]);
+
+  const handleTotalCard = () => {
+    setCardArr((prevState) => {
+      let componentToAdd = { color: "red", addComp: false, file: null };
+      let indexToChange = prevState.length - 1;
+      return [
+        ...prevState.slice(0, indexToChange),
+        componentToAdd,
+        ...prevState.slice(indexToChange, indexToChange + 1, 1),
+      ];
+    });
+  };
+
+  const handleFiletoState = ({ index, file }) => {
+    console.log(index);
+    setCardArr((prevState) => {
+      let cardArray = [...prevState];
+      cardArray[index].file = file;
+      return cardArray;
+    });
+  };
+
   return (
     <div className="bg-[#F4F5FA]">
       <Container>
@@ -30,9 +52,15 @@ const Upload = () => {
           />
         </label>
         <Grid grid12>
-          {/*################## //place this card in another component  */}
           {cardArr.map((c, i) => (
-            <UploadCard key={i} color={c.color} isMain={c.addComp} />
+            <UploadCard
+              key={i}
+              color={c.color}
+              isMain={c.addComp}
+              index={i}
+              handleFiletoState={c.addComp === false && handleFiletoState} //this file upload function is only for upload component
+              handleTotalCard={c.addComp === true && handleTotalCard}
+            />
           ))}
         </Grid>
       </Container>
