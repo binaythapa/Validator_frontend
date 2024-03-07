@@ -4,6 +4,7 @@ import jwt_decode from "jwt-decode";
 import {
   storeAuthToken,
   getAuthToken,
+  clearAuthToken,
 } from "../../../components/functions/authFunctions";
 
 const AuthContext = createContext();
@@ -11,20 +12,28 @@ const AuthContext = createContext();
 export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
-  const [username, setUserName] = useState("");
-  const [jwtInfo, setJwtInfo] = useState({});
-  const [authToken, setAuthToken] = useState("");
+  const [username, setUserName] = useState(getAuthToken("username"));
+  const [jwtInfo, setJwtInfo] = useState(getAuthToken("jwt_info"));
+  const [authToken, setAuthToken] = useState(getAuthToken("tokens"));
 
   // if user refreshes the page then we get tokens and info from local storage
-  useEffect(() => {
-    let tokenInfo = getAuthToken();
-    console.log(tokenInfo);
-    if (tokenInfo) {
-      setAuthToken(tokenInfo.tokens);
-      setUserName(tokenInfo.username);
-      setJwtInfo(tokenInfo.jwt_info);
-    }
-  }, []);
+  // useEffect(() => {
+  //   let tokenInfo = getAuthToken();
+  //   console.log(tokenInfo);
+  //   if (tokenInfo) {
+  //     console.log(tokenInfo.tokens, tokenInfo.username, tokenInfo.jwt_info);
+  //     setAuthToken(tokenInfo.tokens);
+  //     setUserName(tokenInfo.username);
+  //     setJwtInfo(tokenInfo.jwt_info);
+  //   }
+  // }, []);
+
+  const logOutAll = () => {
+    clearAuthToken();
+    setAuthToken();
+    setJwtInfo();
+    setUserName();
+  };
 
   const signInUser = async (e) => {
     e.preventDefault();
@@ -60,6 +69,7 @@ export const AuthProvider = ({ children }) => {
     username,
     jwtInfo,
     authToken,
+    logOutAll,
   };
 
   return (

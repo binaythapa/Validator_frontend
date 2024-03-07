@@ -1,12 +1,20 @@
+import { useContext, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import AuthContext from "../providers/authProvider/authProvider";
 
 const ProtectedAppRoute = ({ children }) => {
-  const authenticated = true;
+  const { jwtInfo, username } = useContext(AuthContext);
+  console.log(jwtInfo);
+
+  useEffect(() => {
+    console.log(jwtInfo, username);
+  }, []);
+
   const location = useLocation();
-  console.log("Protected routes");
+  // console.log("Protected routes");
   return (
     <>
-      {authenticated === true ? (
+      {jwtInfo.username ? (
         children
       ) : (
         <Navigate

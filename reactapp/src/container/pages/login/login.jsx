@@ -1,14 +1,23 @@
 import { useContext } from "react";
 import AuthContext from "../../../config/providers/authProvider/authProvider";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
 
 const Login = () => {
-  const { signInUser } = useContext(AuthContext);
+  const { signInUser, jwtInfo } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirecAfterLogin = location.state?.path
+    ? location.state.path
+    : "/logic";
 
   const handleLogin = (e) => {
     signInUser(e)
       .then((resp) => {
         if (resp === "SUCCESS") {
           console.log("SUCCESS FROM AUTHCONTEXXT");
+          console.log(redirecAfterLogin);
+          navigate(redirecAfterLogin, { replace: true });
         } else {
           console.log("FAIL");
         }
@@ -18,7 +27,9 @@ const Login = () => {
       });
   };
 
-  return (
+  return jwtInfo ? (
+    <Navigate to="/logic" />
+  ) : (
     <div className="flex justify-center mt-6">
       {/* {auth.name} */}
       <form onSubmit={handleLogin}>

@@ -8,13 +8,21 @@ import Logout from "../../container/pages/logout/logout";
 
 const logicPaths = [
   {
-    path: "upload",
+    path: "",
     element: (
       <ProtectedAppRoute>
         <Upload />
       </ProtectedAppRoute>
     ),
   },
+  // {
+  //   path: "upload",
+  //   element: (
+  //     <ProtectedAppRoute>
+  //       <Upload />
+  //     </ProtectedAppRoute>
+  //   ),
+  // },
   {
     path: "compform",
     element: (
