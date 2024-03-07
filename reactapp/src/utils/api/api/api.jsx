@@ -11,7 +11,7 @@ export const getAPIlist = async ({ clientName }) => {
 
   try {
     // http://127.0.0.1:8000/api/client/?name=OBS%20Observality
-    let resp = await axiosInstance.get("/client/", { params: queryParamas });
+    let resp = await axiosInstance.get("api/client/", { params: queryParamas });
     if (resp.status === 200) {
       console.log(resp);
       return resp.data;
@@ -24,7 +24,7 @@ export const getAPIlist = async ({ clientName }) => {
 
 export const postAPIList = async (headers) => {
   try {
-    let resp = await axiosInstance.post("/form/", headers);
+    let resp = await axiosInstance.post("api/form/", headers);
 
     if (resp.status === 200) {
       //data:{message: 'Successfully Processed Data'}

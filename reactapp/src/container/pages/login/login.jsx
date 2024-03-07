@@ -1,10 +1,22 @@
 import { useContext } from "react";
 import AuthContext from "../../../config/providers/authProvider/authProvider";
 
-const handleLogin = () => {};
-
 const Login = () => {
-  const auth = useContext(AuthContext);
+  const { signInUser } = useContext(AuthContext);
+
+  const handleLogin = (e) => {
+    signInUser(e)
+      .then((resp) => {
+        if (resp === "SUCCESS") {
+          console.log("SUCCESS FROM AUTHCONTEXXT");
+        } else {
+          console.log("FAIL");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   return (
     <div className="flex justify-center mt-6">
@@ -14,7 +26,7 @@ const Login = () => {
           Name:
           <input
             type="text"
-            name="name"
+            name="username"
             className="border border-2 px-4 py-2 m-2"
           />
         </label>

@@ -4,6 +4,7 @@ import Login from "../../container/pages/login/login";
 import MainContentLayout from "../../layout/mainContent/mainContentLayout";
 import Upload from "../../container/pages/upload/upload";
 import ProtectedAppRoute from "./protectedAppRoute";
+import Logout from "../../container/pages/logout/logout";
 
 const logicPaths = [
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <Login />,
+  },
+  {
+    path: "logout",
+    element: <Logout />,
   },
   {
     path: "logic",
