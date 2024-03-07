@@ -18,13 +18,13 @@ export const GridContent = styled.div(({ grid12, ten }) => [
 ]);
 
 export const DoubleCard = styled.div(({ color }) => [
-  tw`my-4 h-[340px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#ECEEFF]`,
+  tw`my-4 h-[342px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#ECEEFF]`,
   color === "red" &&
-    tw`my-4 h-[340px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#F9ECFF]`,
+    tw`my-4 h-[342px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#F9ECFF]`,
   color === "yellow" &&
-    tw`my-4 h-[340px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#FFFBEC]`,
+    tw`my-4 h-[342px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#FFFBEC]`,
   color === "green" &&
-    tw`my-4 h-[340px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#ECFFF6]`,
+    tw`my-4 h-[342px] w-[260px] rounded-xl border-2 border-gray-50 bg-[#ECFFF6]`,
 ]);
 
 export const CardStr = styled.div(() => [
