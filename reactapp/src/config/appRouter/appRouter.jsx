@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import Comparison from "../../container/pages/comparison/comparison";
 import Login from "../../container/pages/login/login";
 import MainContentLayout from "../../layout/mainContent/mainContentLayout";
@@ -37,7 +41,7 @@ const logicPaths = [
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Navigate to="/login" />,
   },
   {
     path: "login",

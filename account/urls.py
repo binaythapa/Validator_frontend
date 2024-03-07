@@ -10,7 +10,7 @@ from rest_framework_simplejwt.views import (
 # from .views import MyTokenObtainPairView, MyTokenObtainPairSerializer
 
 urlpatterns = [
-    re_path('signup', views.signup),
+    re_path('signups', views.signup),
     re_path('login', views.login),
     re_path('test_token', views.test_token),
     re_path('/token/', TokenObtainPairView.as_view(),

@@ -12,6 +12,7 @@ import {
   returnKeyWithMinComp,
 } from "../../../components/functions/functions";
 import { getAPIlist, postAPIList } from "../../../utils/api/api/api";
+import Container from "../../../layout/container/container";
 
 const Comparison = () => {
   const [clientName, setClientName] = useState("");
@@ -189,82 +190,77 @@ const Comparison = () => {
   };
 
   return (
-    <Grid grid12>
-      <GridOffset one />
-      <GridContent ten>
-        {" "}
-        {/* Inner Comparisons  */}
-        <form onSubmit={handleSubmit}>
-          <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
-            Client Name: {clientName}
-          </div>
-          <Grid grid12>
-            <div className="col-span-1 my-3">
-              <div className="font-medium mt-[58px] ml-3">Join Key</div>
-              {minimumKey &&
-                listFromAPI[minimumKey].map((c, index) => (
-                  <div
-                    key={c.header_name}
-                    className="h-20 mt-5 w-20 border-2 border-slate-200 bg-gray-50 rounded-md flex justify-center items-center hover:bg-gray-50 cursor-pointer"
-                  >
-                    <input
-                      type="checkbox"
-                      name={"is_primary_key"}
-                      class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  scale-125"
-                      onChange={(e) => handleCheckBox(e, index)}
-                    />
-                  </div>
-                ))}
-            </div>
-
-            {listFromAPI &&
-              Object.keys(listFromAPI).map((key, i) => (
-                <ComparisonTable
-                  key={key + i}
-                  header_format={header_format}
-                  fullList={listFromAPI}
-                  listKey={key}
-                  onDragData={handleDraggedData}
-                  handleFormChange={handleFormChange}
-                />
+    <Container>
+      {" "}
+      {/* Inner Comparisons  */}
+      <form onSubmit={handleSubmit}>
+        <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
+          Client Name: {clientName}
+        </div>
+        <Grid grid12>
+          <div className="col-span-1 my-3">
+            <div className="font-medium mt-[58px] ml-3">Join Key</div>
+            {minimumKey &&
+              listFromAPI[minimumKey].map((c, index) => (
+                <div
+                  key={c.header_name}
+                  className="h-20 mt-5 w-20 border-2 border-slate-200 bg-gray-50 rounded-md flex justify-center items-center hover:bg-gray-50 cursor-pointer"
+                >
+                  <input
+                    type="checkbox"
+                    name={"is_primary_key"}
+                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500  scale-125"
+                    onChange={(e) => handleCheckBox(e, index)}
+                  />
+                </div>
               ))}
-
-            <div className="col-span-3 my-6">
-              <div className="text-lg font-medium text-center mt-11">
-                DataType
-              </div>
-              {maximumKey &&
-                listFromAPI[maximumKey]?.map((c, index) => (
-                  <div key={index}>
-                    <select
-                      id="datatype"
-                      className="bg-gray-50 border border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
-                      onChange={(e) => handleSelect(e, index)}
-                    >
-                      <option value="" disabled selected>
-                        Select an option
-                      </option>
-                      <option value="String">String</option>
-                      <option value="long">Long</option>
-                      <option value="float">Float</option>
-                    </select>
-                  </div>
-                ))}
-            </div>
-          </Grid>
-          <div className="flex justify-center">
-            <button
-              type="submit"
-              className="px-16 py-4 mb-16 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center"
-            >
-              Submit
-            </button>
           </div>
-        </form>
-      </GridContent>
 
-      <GridOffset one />
-    </Grid>
+          {listFromAPI &&
+            Object.keys(listFromAPI).map((key, i) => (
+              <ComparisonTable
+                key={key + i}
+                header_format={header_format}
+                fullList={listFromAPI}
+                listKey={key}
+                onDragData={handleDraggedData}
+                handleFormChange={handleFormChange}
+              />
+            ))}
+
+          <div className="col-span-3 my-6">
+            <div className="text-lg font-medium text-center mt-11">
+              DataType
+            </div>
+            {maximumKey &&
+              listFromAPI[maximumKey]?.map((c, index) => (
+                <div key={index}>
+                  <select
+                    id="datatype"
+                    className="bg-gray-50 border border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[34px] mb-[46px] outline-neutral-700"
+                    onChange={(e) => handleSelect(e, index)}
+                  >
+                    <option value="" disabled selected>
+                      Select an option
+                    </option>
+                    <option value="String">String</option>
+                    <option value="long">Long</option>
+                    <option value="float">Float</option>
+                  </select>
+                </div>
+              ))}
+          </div>
+        </Grid>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="px-16 py-4 mb-16 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </Container>
   );
 };
 

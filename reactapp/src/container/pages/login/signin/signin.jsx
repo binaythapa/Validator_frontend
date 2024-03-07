@@ -9,7 +9,7 @@ const SignIn = ({ handleLogin, handleSignedState }) => {
           Username
         </label>
         <input
-          type="username"
+          type="text"
           id="username"
           name="username"
           className="shadow-sm rounded-md w-full px-3 py-2 border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
