@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import AuthContext from "../../../config/providers/authProvider/authProvider";
 import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import SignIn from "./signin/signin";
+import SignUp from "./signup/signup";
 
 const Login = () => {
+  const [isSignIn, setIsSignIn] = useState(true);
   const { signInUser, jwtInfo } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,39 +30,30 @@ const Login = () => {
       });
   };
 
+  const updateSignedState = (updatedState) => {
+    setIsSignIn(updatedState);
+  };
+
   return jwtInfo ? (
     <Navigate to="/logic" />
   ) : (
-    <div className="flex justify-center mt-6">
-      {/* {auth.name} */}
-      <form onSubmit={handleLogin}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="username"
-            className="border border-2 px-4 py-2 m-2"
+    <div className="min-h-screen flex items-center justify-center w-full bg-[#F3F4F6] ">
+      <div className="bg-white shadow-md rounded-lg px-8 py-6 max-w-md border-2 border-gray-50">
+        <h1 className="text-2xl font-bold text-center mb-4 mt-2 w-[300px]">
+          {isSignIn ? "Sign In" : "Sign Up"}
+        </h1>
+        {isSignIn ? (
+          <SignIn
+            handleLogin={handleLogin}
+            handleSignedState={updateSignedState}
           />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input
-            type="text"
-            name="password"
-            className="border border-2 m-2 px-4 py-2"
+        ) : (
+          <SignUp
+            handleSingUp={handleLogin}
+            handleSignedState={updateSignedState}
           />
-        </label>
-        <br />
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="px-[32px] py-3 bg-blue-500 rounded-[20px] text-xl text-white inline-block mt-4"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
+        )}
+      </div>
     </div>
   );
 };
