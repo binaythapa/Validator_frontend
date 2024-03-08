@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Grid } from "../../../components/tailwind/tailwind_variable";
 import Container from "../../../layout/container/container";
 import UploadCard from "./uploadCards/uploadCard";
+import { uploadFiles } from "../../../utils/api/api/fileAPI";
 
 const Upload = () => {
   const [cardArr, setCardArr] = useState([
@@ -82,6 +83,13 @@ const Upload = () => {
       });
       console.log(filterFileFromCardArr);
       console.log(sendArr);
+
+      try {
+        let resp = await uploadFiles({ formData: sendArr });
+        console.log(resp);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       alert("Please Fill all the form");
     }
@@ -136,15 +144,15 @@ const Upload = () => {
           onClick={(e) => handleFileSubmit(e)}
           className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[40px]"
         >
-          Upload
+          Submit
         </button>
       </form>
-      {/* <Link
+      <Link
         to="/logic/compform"
         className="inline-block px-8 py-4 bg-blue-500 text-white rounded-[24px]"
       >
         Upload
-      </Link> */}
+      </Link>
     </div>
   );
 };
