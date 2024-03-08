@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, render
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Test, File, Client
-from .serializers import TestSerializer, ClientSerializer, FormInfoSerializer, QueryInfoSerializer
+from .serializers import TestSerializer, ClientSerializer, FormInfoSerializer, QueryInfoSerializer, FileUploadSerializer
 from django.http import JsonResponse
 from django.views.generic import View
 from .models import Forminfo, Queryinfo
@@ -33,7 +33,7 @@ class TestRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
         return obj
 
 
-class FileUploadView(View):
+class FileUploadView(APIView):
     def get(self, request):
         # Retrieve all files from the database
         files = File.objects.all()
@@ -56,6 +56,15 @@ class FileUploadView(View):
             return JsonResponse({'message': 'File uploaded successfully', 'file_title': title})
         else:
             return JsonResponse({'error': 'No file found'}, status=400)
+
+
+class FileUploadView(APIView):
+    def post(self, request, format=None):
+        serializer = FileUploadSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ClientView(generics.ListCreateAPIView):
@@ -110,6 +119,7 @@ class ClientAPIView(APIView):
             })
 
 
+# USED multiple model to save data from single API
 class FormAPIView(APIView):
     def post(self, request, *args, **kwargs):
         data = request.data
@@ -126,6 +136,7 @@ class FormAPIView(APIView):
             with transaction.atomic():
                 for key in formInfo_data:  # pepco or pound_land
                     for obj in formInfo_data[key]:
+                        # Extract first data
                         form_data = {
                             "client_name": client_name,
                             "client_name_alias": client_name_alias,

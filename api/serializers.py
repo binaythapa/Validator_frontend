@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Test, Client, Forminfo, Queryinfo
+from .models import Test, Client, Forminfo, Queryinfo, UploadedFile
 
 
 class TestSerializer(serializers.ModelSerializer):
@@ -15,6 +15,7 @@ class ClientSerializer(serializers.ModelSerializer):
 
 
 class FormInfoSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Forminfo
         fields = '__all__'
@@ -24,3 +25,9 @@ class QueryInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Queryinfo
         fields = '__all__'
+
+
+class FileUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UploadedFile
+        fields = ['title', 'client_name', 'client_alias', 'file']
