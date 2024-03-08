@@ -21,12 +21,20 @@ const Test = () => {
     let fileContent = e.target.files[0];
     console.log(fileContent);
     let title = fileContent.name;
-    let forD = {
-      client_name: "Client second",
-      client_alias: "alias",
-      title,
-      file: fileContent,
-    };
+    let forD = [
+      {
+        client_name: "Client second",
+        client_alias: "alias",
+        title,
+        file: fileContent,
+      },
+      {
+        client_name: "second",
+        client_alias: "second alias",
+        title: "second title",
+        file: fileContent,
+      },
+    ];
 
     setFormData(forD);
   };

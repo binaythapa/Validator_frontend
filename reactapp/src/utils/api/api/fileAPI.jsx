@@ -22,15 +22,33 @@ export const getFiles = async ({ clientName }) => {
 };
 
 export const uploadFiles = async ({ formData }) => {
+  //DESTRUCTURE ARRAY INTO FORM TYPE
+  //   console.log(formData);
+  //   const formDataArray = formData.map((item) => {
+  //     const formData = new FormData();
+
+  //     formData.append("client_name", item.client_name);
+  //     formData.append("client_alias", item.client_alias);
+  //     formData.append("title", item.title);
+  //     formData.append("file", item.file);
+
+  //     console.log([...formData.entries()]);
+
+  //     return formData;
+  //   });
+
+  //   console.log(formDataArray);
+
+  //API HIT
   try {
-    console.log(formData);
+    // console.log(formDataArray);
     let resp = await axiosInstance.post("api/file_upload/", formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
     });
     console.log(resp);
-    if (resp.status === 200) {
+    if (resp.status === 201) {
       console.log(resp);
       return resp;
     }
