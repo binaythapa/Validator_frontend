@@ -29,30 +29,37 @@ const Test = () => {
     };
 
     setFormData(forD);
-    //place this in form
-    // try {
-    //   let resp = uploadFiles({ formData: forD });
+  };
 
-    //   if (resp.status === 200) {
-    //     console.log("SUCCESS");
-    //     return resp;
-    //   }
-    //   // console.log(resp);
-    // } catch (error) {
-    //   console.log(error);
-    //   throw error;
-    // }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(formData);
+      let resp = await uploadFiles({ formData: formData });
+      console.log(resp);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <>
       <div className="text-5xl font-bold text-center mt-[120px]">TEST</div>
-      <input
-        type="file"
-        name="files"
-        id="filing"
-        onChange={(e) => handleFileChange(e)}
-      />
+      <form encType="multipart/form-data">
+        <input
+          type="file"
+          name="files"
+          id="filing"
+          onChange={(e) => handleFileChange(e)}
+        />
+        <button
+          type="submit"
+          onClick={handleSubmit}
+          className="bg-orange-200 py-3 px-7 rounded-lg"
+        >
+          SUBMIT
+        </button>
+      </form>
     </>
   );
 };

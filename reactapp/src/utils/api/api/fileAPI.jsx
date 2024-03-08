@@ -23,7 +23,13 @@ export const getFiles = async ({ clientName }) => {
 
 export const uploadFiles = async ({ formData }) => {
   try {
-    let resp = await axiosInstance.post("api/file_upload/", formData);
+    console.log(formData);
+    let resp = await axiosInstance.post("api/file_upload/", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    console.log(resp);
     if (resp.status === 200) {
       console.log(resp);
       return resp;

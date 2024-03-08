@@ -58,7 +58,7 @@ class FileUploadView(APIView):
             return JsonResponse({'error': 'No file found'}, status=400)
 
 
-class FileUploadView(generics.ListCreateAPIView):
+class FileUploadAPI(generics.ListCreateAPIView):
     queryset = UploadedFile.objects.all()
     serializer_class = FileUploadSerializer
 
@@ -72,6 +72,7 @@ class FileUploadView(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         serializer = FileUploadSerializer(data=request.data)
+        print(request.data, serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

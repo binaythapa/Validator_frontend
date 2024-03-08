@@ -10,7 +10,7 @@ urlpatterns = [
     path('/tests/<int:pk>/', TestRetrieveUpdateDestroyAPIView.as_view(),
          name='test-detail'),
     # path('/file_upload/', FileUploadView.as_view(), name='file_upload'),
-    path('/file_upload/', FileUploadView.as_view(), name="fileView"),
+    path('/file_upload/', FileUploadAPI.as_view(), name="fileView"),
     path('/index/', index, name="index"),
     path('/client/post/', ClientView.as_view(), name='clientView'),
     path('/client/', ClientAPIView.as_view(), name='clientAPI'),
