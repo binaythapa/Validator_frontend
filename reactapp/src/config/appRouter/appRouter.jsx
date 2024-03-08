@@ -9,6 +9,7 @@ import MainContentLayout from "../../layout/mainContent/mainContentLayout";
 import Upload from "../../container/pages/upload/upload";
 import ProtectedAppRoute from "./protectedAppRoute";
 import Logout from "../../container/pages/logout/logout";
+import Test from "../../container/pages/test/test";
 
 const logicPaths = [
   {
@@ -19,14 +20,6 @@ const logicPaths = [
       </ProtectedAppRoute>
     ),
   },
-  // {
-  //   path: "upload",
-  //   element: (
-  //     <ProtectedAppRoute>
-  //       <Upload />
-  //     </ProtectedAppRoute>
-  //   ),
-  // },
   {
     path: "compform",
     element: (
@@ -50,6 +43,10 @@ const router = createBrowserRouter([
   {
     path: "logout",
     element: <Logout />,
+  },
+  {
+    path: "test",
+    element: <Test />,
   },
   {
     path: "logic",
