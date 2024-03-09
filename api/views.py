@@ -96,44 +96,6 @@ class FileUploadAPI(generics.ListCreateAPIView):
                     else:
                         raise ValidationError(file_serializer.errors)
 
-                # for key in fileReceivedArr:
-                # this key has all covered no need to destructure {client_name:"",client_alias:"",file:"",title:""}
-                # file_data = fileReceivedArr[key]
-                # print(file_data, key)
-                # # Extracting individual fields
-                # # client_name = if 'client_name'
-                # client_alias = file_data.get(f"{key}", "")
-                # title = file_data.get(f"{key}", "")
-                # file_obj = file_data.get(f"{key}")
-
-                # print("the data are", client_name,
-                #       client_alias, title, file_obj)
-
-                # # check if 'file' is an InMemoryUploadedFile Instance
-                # if isinstance(file_obj, InMemoryUploadedFile):
-                #     # now feed this into serializer
-                #     file_serializer = FileUploadSerializer(data={
-                #         'client_name': client_name,
-                #         'client_alias': client_alias,
-                #         'title': title,
-                #         'file': file_obj
-                #     })
-
-                #     if file_serializer.is_valid():
-                #         file_serializer.save()
-                #     else:
-                #         raise ValidationError(file_serializer.errors)
-                # else:
-                #     raise ValidationError({'error': 'Invalid file format'})
-
-                # file_serializer = FileUploadSerializer(data=fileObj)
-                # if file_serializer.is_valid():
-                #     file_serializer.save()
-                #     # return Response({'message': 'Top response ,Successfully Saved all Data'})
-                # else:
-                #     # Raise Error
-                #     raise ValidationError(file_serializer.errors)
-
         except ValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
