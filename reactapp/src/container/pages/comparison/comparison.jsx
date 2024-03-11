@@ -219,7 +219,7 @@ const Comparison = () => {
           {/* {clientName} */}
           <select
             id="from"
-            className="w-[380px] border ml-[20px] border-2 border-gray-300 text-gray-900 text-[1.2rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
+            className="w-[380px] form-select appearance-none pr-[40px] pl-2 bg-no-repeat border ml-[20px] border-2 border-gray-300 text-gray-900 text-[1.2rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
           >
             <option value="" disabled selected>
               Select Client
@@ -237,7 +237,7 @@ const Comparison = () => {
               </h2>
               <select
                 id="from"
-                className="w-[420px] bg-gray-50 border ml-[100px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
+                className="w-10/12 form-select appearance-none pr-8 pl-2 bg-no-repeat bg-gray-50 border ml-[100px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
               >
                 <option value="" disabled selected>
                   From
@@ -251,7 +251,7 @@ const Comparison = () => {
               <h2 className="text-[1.2rem] font-medium inline-block">Map To</h2>
               <select
                 id="to"
-                className="w-[420px] bg-gray-50 border ml-[90px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
+                className="w-10/12 form-select appearance-none pr-8 pl-2 bg-no-repeat bg-gray-50 border ml-[90px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
               >
                 <option value="" disabled selected>
                   to

@@ -12,7 +12,7 @@ const Container = ({ children, classInfo }) => {
     <div className={classInf(classInfo)}>
       <div className="col-span-1" />
       <div className="col-span-10">{children}</div>
-      {/* <div className="col-span-1" /> */}
+      <div className="col-span-1" />
     </div>
   );
   // return <>fads</>;

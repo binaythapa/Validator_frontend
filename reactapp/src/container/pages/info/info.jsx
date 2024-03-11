@@ -50,7 +50,7 @@ const Info = () => {
   ];
 
   const handleAdd = () => {
-    navigate("/logic/upload");
+    navigate("/logic/compform");
   };
   return (
     <>
@@ -61,7 +61,7 @@ const Info = () => {
         <div className="flex">
           <div
             onClick={handleAdd}
-            className="ml-auto cursor-pointer text-blue-500 mb-3 rounded-lg px-1 py-3 w-[100px] text-center font-medium text-xl ml-[%] transition ease-out hover:bg-indigo-500 hover:text-white border border-2 border-indigo-500 "
+            className="ml-auto cursor-pointer mb-3 rounded-lg py-2 text-indigo-500 w-[100px] text-center font-medium text-xl transition ease-out hover:bg-indigo-500 hover:text-white border border-2 border-indigo-500 "
           >
             + Add
           </div>

@@ -83,10 +83,10 @@ const Navbar = () => {
                     </span>
                   </a> */}
 
-                <a className="flex items-center hover:text-gray-200" href="#">
+                <a className="flex items-center hover:text-gray-600" href="#">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 hover:text-gray-200"
+                    className="h-6 w-6 hover:text-gray-600"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -109,7 +109,7 @@ const Navbar = () => {
             <a className="navbar-burger self-center mr-12 xl:hidden" href="#">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 hover:text-gray-200"
+                className="h-6 w-6 hover:text-gray-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
