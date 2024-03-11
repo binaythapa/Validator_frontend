@@ -101,7 +101,7 @@ const Upload = () => {
   };
 
   return (
-    <div className="bg-[#F4F5FA] pt-4">
+    <div className="bg-[#F4F5FA] pt-4 h-screen">
       <form>
         <Container>
           <div className="text-3xl font-bold mb-6 mt-2">Upload File</div>

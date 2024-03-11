@@ -197,6 +197,43 @@ const Comparison = () => {
         <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
           Client Name: {clientName}
         </div>
+        {/* lablell */}
+        <div>
+          <Grid grid12 className="mt-4">
+            {/* <GridOffset> </GridOffset> */}
+            <div className="col-span-5">
+              {/* <h2 className="text-2xl font-medium">Map From</h2> */}
+              <h2 className="text-[1.2rem] font-medium inline-block">
+                Map From
+              </h2>
+              <select
+                id="from"
+                className="w-[340px] bg-gray-50 border ml-[100px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
+              >
+                <option value="" disabled selected>
+                  From
+                </option>
+                <option value="String">Pepco</option>
+                <option value="long">Pound Land</option>
+              </select>
+            </div>
+            <div className="col-span-5">
+              <h2 className="text-[1.2rem] font-medium inline-block">Map To</h2>
+              <select
+                id="to"
+                className="w-[340px] bg-gray-50 border ml-[80px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
+              >
+                <option value="" disabled selected>
+                  to
+                </option>
+                <option value="String">Pepco</option>
+                <option value="long">Pound Land</option>
+              </select>
+            </div>
+            <GridOffset one />
+          </Grid>
+        </div>
+        {/* #####################   */}
         <Grid grid12>
           <div className="col-span-1 my-3">
             <div className="font-medium mt-[58px] ml-3">Join Key</div>
