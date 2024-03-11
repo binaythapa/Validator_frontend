@@ -190,7 +190,7 @@ const Comparison = () => {
   };
 
   return (
-    <Container>
+    <Container className="bg-[#F4F5FA] h-screen pt-3">
       {" "}
       {/* Inner Comparisons  */}
       <form onSubmit={handleSubmit}>

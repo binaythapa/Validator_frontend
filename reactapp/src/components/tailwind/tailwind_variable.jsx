@@ -31,6 +31,9 @@ export const CardStr = styled.div(() => [
   tw`rounded-xl bg-white shadow-xl translate-x-4 translate-y-4 w-full h-full px-6 py-7`,
 ]);
 
+export const Button = styled.div(() => [
+  tw`px-6 py-3 rounded-md bg-indigo-500 hover:bg-indigo-400 text-white font-medium cursor-pointer`,
+]);
 {
   /* <React.Fragment>
 <Grid>

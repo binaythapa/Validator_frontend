@@ -10,10 +10,19 @@ import Upload from "../../container/pages/upload/upload";
 import ProtectedAppRoute from "./protectedAppRoute";
 import Logout from "../../container/pages/logout/logout";
 import Test from "../../container/pages/test/test";
+import Info from "../../container/pages/info/info";
 
 const logicPaths = [
   {
     path: "",
+    element: (
+      <ProtectedAppRoute>
+        <Info />
+      </ProtectedAppRoute>
+    ),
+  },
+  {
+    path: "upload",
     element: (
       <ProtectedAppRoute>
         <Upload />

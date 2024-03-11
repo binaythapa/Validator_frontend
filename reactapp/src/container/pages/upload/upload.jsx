@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Grid } from "../../../components/tailwind/tailwind_variable";
 import Container from "../../../layout/container/container";
 import UploadCard from "./uploadCards/uploadCard";
 import { uploadFiles } from "../../../utils/api/api/fileAPI";
 
 const Upload = () => {
+  const navigate = useNavigate();
+
   const [cardArr, setCardArr] = useState([
     { color: "red", addComp: false, file: null },
     { color: "blue", addComp: false, file: null },
@@ -86,6 +88,9 @@ const Upload = () => {
 
       try {
         let resp = await uploadFiles({ formData: sendArr });
+        if (resp.status === 200) {
+          navigate("/logic/compform");
+        }
         console.log(resp);
       } catch (error) {
         console.log(error);
@@ -96,7 +101,7 @@ const Upload = () => {
   };
 
   return (
-    <div className="bg-[#F4F5FA]">
+    <div className="bg-[#F4F5FA] pt-4">
       <form>
         <Container>
           <div className="text-3xl font-bold mb-6 mt-2">Upload File</div>
@@ -142,17 +147,17 @@ const Upload = () => {
         <button
           type="submit"
           onClick={(e) => handleFileSubmit(e)}
-          className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[40px]"
+          className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
         >
           Submit
         </button>
       </form>
-      <Link
+      {/* <Link
         to="/logic/compform"
         className="inline-block px-8 py-4 bg-blue-500 text-white rounded-[24px]"
       >
         Upload
-      </Link>
+      </Link> */}
     </div>
   );
 };
