@@ -15,7 +15,7 @@ const Container = ({ children, classInfo }) => {
       <div className="col-span-1" />
     </div>
   );
-  // return <>fads</>;
+  // return <>{children}</>;
 };
 
 export default Container;
