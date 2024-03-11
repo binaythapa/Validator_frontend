@@ -209,7 +209,7 @@ const Comparison = () => {
   };
 
   return (
-    <Container className="bg-[#F4F5FA] h-screen pt-3">
+    <Container className="bg-[#F4F5FA] min-h-screen pt-3">
       {" "}
       {/* Inner Comparisons  */}
       {/* ################# Client Map From To ################ */}

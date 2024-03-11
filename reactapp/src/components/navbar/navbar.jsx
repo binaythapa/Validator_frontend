@@ -1,11 +1,17 @@
 import { useContext } from "react";
 import AuthContext from "../../config/providers/authProvider/authProvider";
 import { Button } from "../tailwind/tailwind_variable";
-import { NavLink, useNavigate, useRouteMatch } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { jwtInfo, logOutAll } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isHome = location.pathname === "/logic";
+
+  let inActiveClass = "text-indigo-700";
+  let activeClass = "text-gray-500 hover:text-gray-700";
 
   const handleLogout = () => {
     navigate("/logout", { replace: true });
@@ -14,23 +20,21 @@ const Navbar = () => {
     <>
       <div className="flex flex-wrap place-items-center ">
         <section className="relative mx-auto">
-          <nav className="flex justify-between bg-gray-300 shadow shadow-gray-300 text-gray-600 font-bold w-screen">
+          <nav className="flex justify-between bg-gray-50 shadow shadow-gray-300 text-gray-600 font-bold w-screen">
             <div className="px-5 xl:px-12 py-3 flex w-full items-center">
               <a className="text-3xl font-bold font-heading" href="#">
                 {/* <!-- <img className="h-9" src="logo.png" alt="logo"> --> */}
                 Logic
               </a>
 
-              <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
+              <ul className="hidden md:flex px-4 mx-auto text-[1.05rem] font-semibold font-heading space-x-12">
                 <li>
                   <NavLink
-                    to="/logic"
+                    // to="/logic"
+                    to="http://localhost:3000/logic"
+                    className={isHome ? inActiveClass : activeClass}
+                    end
                     exact
-                    className={(isActive) =>
-                      isActive
-                        ? "text-indigo-700"
-                        : "text-gray-500 hover:text-gray-700"
-                    }
                   >
                     Home
                   </NavLink>
@@ -39,9 +43,7 @@ const Navbar = () => {
                   <NavLink
                     to="/logic/upload"
                     className={({ isActive }) =>
-                      isActive
-                        ? "text-indigo-700"
-                        : "text-gray-500 hover:text-gray-700"
+                      isActive ? inActiveClass : activeClass
                     }
                   >
                     Client Info

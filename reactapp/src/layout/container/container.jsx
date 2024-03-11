@@ -4,14 +4,18 @@ import {
   GridOffset,
 } from "../../components/tailwind/tailwind_variable";
 
-const Container = ({ children }) => {
+const Container = ({ children, classInfo }) => {
+  const classInf = (c) => {
+    return `grid grid-cols-12 gap-4 ${c}`;
+  };
   return (
-    <Grid grid12>
-      <GridOffset one />
-      <GridContent ten>{children}</GridContent>
-      <GridOffset one />
-    </Grid>
+    <div className={classInf(classInfo)}>
+      <div className="col-span-1" />
+      <div className="col-span-10">{children}</div>
+      {/* <div className="col-span-1" /> */}
+    </div>
   );
+  // return <>fads</>;
 };
 
 export default Container;
