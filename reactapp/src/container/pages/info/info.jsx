@@ -5,7 +5,7 @@ const Info = () => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    navigate("/logic/compform");
+    navigate("/logic/compform", { state: { edit: true } });
   };
 
   const actionBtn = (
