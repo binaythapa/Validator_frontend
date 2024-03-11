@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import AuthContext from "../../config/providers/authProvider/authProvider";
 import { Button } from "../tailwind/tailwind_variable";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate, useRouteMatch } from "react-router-dom";
 
 const Navbar = () => {
   const { jwtInfo, logOutAll } = useContext(AuthContext);
@@ -23,14 +23,29 @@ const Navbar = () => {
 
               <ul className="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                 <li>
-                  <a className="text-indigo-500 hover:text-gray-700" href="#">
+                  <NavLink
+                    to="/logic"
+                    exact
+                    className={(isActive) =>
+                      isActive
+                        ? "text-indigo-700"
+                        : "text-gray-500 hover:text-gray-700"
+                    }
+                  >
                     Home
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-700" href="#">
-                    Upload
-                  </a>
+                  <NavLink
+                    to="/logic/upload"
+                    className={({ isActive }) =>
+                      isActive
+                        ? "text-indigo-700"
+                        : "text-gray-500 hover:text-gray-700"
+                    }
+                  >
+                    Client Info
+                  </NavLink>
                 </li>
                 <li>
                   <a className="hover:text-gray-700" href="#">

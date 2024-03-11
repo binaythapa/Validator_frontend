@@ -10,8 +10,8 @@ const Upload = () => {
 
   const [cardArr, setCardArr] = useState([
     { color: "red", addComp: false, file: null },
-    { color: "blue", addComp: false, file: null },
-    { color: "yellow", addComp: false, file: null },
+    // { color: "blue", addComp: false, file: null },
+    // { color: "yellow", addComp: false, file: null },
     { color: "green", addComp: true, file: null },
   ]);
 
@@ -32,12 +32,17 @@ const Upload = () => {
   }, [cardArr]);
 
   const handleTotalCard = () => {
+    const componToAdd = (index) => {
+      let cols = ["red", "blue", "yellow"];
+      return { color: cols[index % 3], addComp: false, file: null };
+    };
     setCardArr((prevState) => {
       let componentToAdd = { color: "red", addComp: false, file: null };
       let indexToChange = prevState.length - 1;
       return [
         ...prevState.slice(0, indexToChange),
-        componentToAdd,
+        // componentToAdd,
+        componToAdd(indexToChange),
         ...prevState.slice(indexToChange, indexToChange + 1, 1),
       ];
     });

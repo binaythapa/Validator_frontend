@@ -214,72 +214,63 @@ const Comparison = () => {
       {/* Inner Comparisons  */}
       {/* ################# Client Map From To ################ */}
       <form onSubmit={handleSubmit}>
-        {isEdit === false ? (
-          <>
-            <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
-              Client Name:
-              {/* {clientName} */}
+        <div className="text-xl font-medium mt-4 pb-2 border-b-2 border-gray-100">
+          Client Name:
+          {/* {clientName} */}
+          <select
+            id="from"
+            className="w-[380px] border ml-[20px] border-2 border-gray-300 text-gray-900 text-[1.2rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
+          >
+            <option value="" disabled selected>
+              Select Client
+            </option>
+            <option value="String">ABS Observability</option>
+            <option value="long">System Observabiltiy</option>
+          </select>
+        </div>
+        <div>
+          <Grid grid12 className="mt-4">
+            <div className="col-span-5">
+              {/* <h2 className="text-2xl font-medium">Map From</h2> */}
+              <h2 className="text-[1.2rem] font-medium inline-block">
+                Map From
+              </h2>
               <select
                 id="from"
-                className="w-[340px] border ml-[20px] border-2 border-gray-300 text-gray-900 text-[1.2rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
+                className="w-[420px] bg-gray-50 border ml-[100px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
               >
                 <option value="" disabled selected>
-                  Select Client
+                  From
                 </option>
-                <option value="String">ABS Observability</option>
-                <option value="long">System Observabiltiy</option>
+                <option value="String">Pepco</option>
+                <option value="long">Pound Land</option>
               </select>
             </div>
-            <div>
-              <Grid grid12 className="mt-4">
-                <div className="col-span-5">
-                  {/* <h2 className="text-2xl font-medium">Map From</h2> */}
-                  <h2 className="text-[1.2rem] font-medium inline-block">
-                    Map From
-                  </h2>
-                  <select
-                    id="from"
-                    className="w-[340px] bg-gray-50 border ml-[100px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
-                  >
-                    <option value="" disabled selected>
-                      From
-                    </option>
-                    <option value="String">Pepco</option>
-                    <option value="long">Pound Land</option>
-                  </select>
-                </div>
-                <div className="col-span-5">
-                  <h2 className="text-[1.2rem] font-medium inline-block">
-                    Map To
-                  </h2>
-                  <select
-                    id="to"
-                    className="w-[340px] bg-gray-50 border ml-[80px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
-                  >
-                    <option value="" disabled selected>
-                      to
-                    </option>
-                    <option value="String">Pepco</option>
-                    <option value="long">Pound Land</option>
-                  </select>
-                </div>
-                <div className="col-span-1">
-                  <div
-                    onClick={() => handleMap(true)}
-                    className="mt-[42px] px-6 py-3 h-[52px] rounded-md bg-indigo-500 hover:bg-indigo-400 text-center w-[100px] text-white font-medium cursor-pointer"
-                  >
-                    Map
-                  </div>
-                </div>
-              </Grid>
-            </div>{" "}
-          </>
-        ) : (
-          ""
-        )}
-
+            {/* <div className="col-span-1"></div> */}
+            <div className="col-span-5">
+              <h2 className="text-[1.2rem] font-medium inline-block">Map To</h2>
+              <select
+                id="to"
+                className="w-[420px] bg-gray-50 border ml-[90px] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
+              >
+                <option value="" disabled selected>
+                  to
+                </option>
+                <option value="String">Pepco</option>
+                <option value="long">Pound Land</option>
+              </select>
+            </div>
+            <div className="col-span-1">
+              <div
+                onClick={() => handleMap(true)}
+                className="mt-[42px] px-6 py-3 h-[52px] rounded-md bg-indigo-500 hover:bg-indigo-400 text-center w-[100px] text-white font-medium cursor-pointer"
+              >
+                Map
+              </div>
+            </div>
+          </Grid>
+        </div>{" "}
         {/* ################# Comparison Table ################ */}
-
         {/* #####################   */}
         {isMapped === true ? (
           <div>
