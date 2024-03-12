@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Button,
-  Grid,
-  GridContent,
-  GridOffset,
-} from "../../../components/tailwind/tailwind_variable";
+import { Grid } from "../../../components/tailwind/tailwind_variable";
 import ComparisonTable from "./comparison Table/comparison_table";
 import { client_name, header_format } from "./comparison Table/comparison_json";
 // import { getAPIlist } from "../../../api/api";
@@ -219,7 +214,7 @@ const Comparison = () => {
           {/* {clientName} */}
           <select
             id="from"
-            className="w-[380px] form-select appearance-none pr-[40px] pl-2 bg-no-repeat border ml-[20px] border-2 border-gray-300 text-gray-900 text-[1.2rem] rounded-lg focus:ring-blue-500 focus:border-blue-500  px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
+            className="w-[380px] bg-transparent form-select appearance-none pr-[40px] pl-2 bg-no-repeat border ml-[20px] border-2 border-gray-200 text-gray-900 text-[1.2rem] rounded-lg focus:ring-blue-500 focus:border-blue-500 focus:outline-none  px-5 py-3 mt-[14px] mb-[6px] outline-neutral-700"
           >
             <option value="" disabled selected>
               Select Client
@@ -230,14 +225,14 @@ const Comparison = () => {
         </div>
 
         <div className="grid grid-cols-12 mt-4 gap-6">
-          <div className="col-span-5">
+          <div className="col-span-5 ">
             {/* <h2 className="text-2xl font-medium">Map From</h2> */}
             <div className="text-[1.2rem] font-medium inline-block">
               Map From
             </div>
             <select
               id="from"
-              className="w-[80%] form-select appearance-none pr-8 pl-2 bg-no-repeat bg-gray-50 border ml-[19%] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
+              className="w-[80%] block focus:outline-none  form-select appearance-none pr-8 pl-2 bg-no-repeat bg-gray-50 border ml-[19%] border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 px-5 py-4 mt-[14px] mb-[6px] outline-neutral-700"
             >
               <option value="" disabled selected>
                 From
@@ -251,7 +246,7 @@ const Comparison = () => {
             <div className="text-[1.2rem] font-medium inline-block">Map To</div>
             <select
               id="to"
-              className="w-[80%] ml-[19%] form-select appearance-none pr-8 pl-2 bg-no-repeat bg-gray-50 border  border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
+              className="w-[80%] ml-[19%] focus:outline-none form-select appearance-none pr-8 pl-2 bg-no-repeat bg-gray-50 border  border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  px-5 py-4 mt-[14px] mb-[20px] outline-neutral-700"
             >
               <option value="" disabled selected>
                 to

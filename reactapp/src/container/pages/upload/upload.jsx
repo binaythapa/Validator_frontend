@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Grid } from "../../../components/tailwind/tailwind_variable";
 import Container from "../../../layout/container/container";
 import UploadCard from "./uploadCards/uploadCard";
 import { uploadFiles } from "../../../utils/api/api/fileAPI";
+import * as XLSX from "xlsx";
+import { extractHeader } from "../../../components/functions/parseFunctions";
 
 const Upload = () => {
   const navigate = useNavigate();
 
   const [cardArr, setCardArr] = useState([
-    { color: "red", addComp: false, file: null },
-    // { color: "blue", addComp: false, file: null },
-    // { color: "yellow", addComp: false, file: null },
+    { color: "red", addComp: false, file: null, headers: [] },
+    // { color: "blue", addComp: false, file: null , headers:[]},
+    // { color: "yellow", addComp: false, file: null, headers:[] },
     { color: "green", addComp: true, file: null },
   ]);
 
@@ -34,10 +36,15 @@ const Upload = () => {
   const handleTotalCard = () => {
     const componToAdd = (index) => {
       let cols = ["red", "blue", "yellow"];
-      return { color: cols[index % 3], addComp: false, file: null };
+      return {
+        color: cols[index % 3],
+        addComp: false,
+        file: null,
+        headers: [],
+      };
     };
     setCardArr((prevState) => {
-      let componentToAdd = { color: "red", addComp: false, file: null };
+      // let componentToAdd = { color: "red", addComp: false, file: null, , headers:[] };
       let indexToChange = prevState.length - 1;
       return [
         ...prevState.slice(0, indexToChange),
@@ -50,11 +57,19 @@ const Upload = () => {
 
   const handleFiletoState = ({ index, file }) => {
     console.log(index);
-    setCardArr((prevState) => {
-      let cardArray = [...prevState];
-      cardArray[index].file = file;
-      return cardArray;
-    });
+    //use the file given here by dragNdrop Upload component to extract headers and insert it to cardArray state
+    extractHeader({ excelFile: file })
+      .then((resp) => {
+        console.log(resp);
+        setCardArr((prevState) => {
+          let cardArray = [...prevState];
+          cardArray[index].file = file;
+          return cardArray;
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleFileSubmit = async (e) => {
@@ -91,15 +106,16 @@ const Upload = () => {
       console.log(filterFileFromCardArr);
       console.log(sendArr);
 
-      try {
-        let resp = await uploadFiles({ formData: sendArr });
-        if (resp.status === 200) {
-          navigate("/logic/compform");
-        }
-        console.log(resp);
-      } catch (error) {
-        console.log(error);
-      }
+      //################# API ##############
+      // try {
+      //   let resp = await uploadFiles({ formData: sendArr });
+      //   if (resp.status === 200) {
+      //     navigate("/logic/compform");
+      //   }
+      //   console.log(resp);
+      // } catch (error) {
+      //   console.log(error);
+      // }
     } else {
       alert("Please Fill all the form");
     }
