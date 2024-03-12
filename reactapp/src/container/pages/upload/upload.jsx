@@ -143,6 +143,14 @@ const Upload = () => {
     }
   };
 
+  const handleModifiedName = ({ event, index, key }) => {
+    setCardArr((prevCardArr) => {
+      let arr = [...prevCardArr];
+      arr[index]["headers"][key] = event.target.value;
+      return arr;
+    });
+  };
+
   return (
     <div className="bg-[#F4F5FA] pt-4 min-h-screen">
       <form>
@@ -191,8 +199,13 @@ const Upload = () => {
           {fileLengthArr.length > 0 &&
             cardArr.map(
               (comp, index) =>
-                comp?.headers && (
-                  <ModifiedNameTable headers={comp.headers} index={index} />
+                (Object.keys(comp?.headers)?.length > 0) &
+                  fileLengthArr.includes(index) && (
+                  <ModifiedNameTable
+                    handleModifiedName={handleModifiedName}
+                    headers={comp.headers}
+                    index={index}
+                  />
                 )
               // Object.keys(comp.headers).map((key) => (
               //   <>
