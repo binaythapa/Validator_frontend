@@ -30,3 +30,11 @@ export const extractHeader = ({ excelFile }) => {
     }
   });
 };
+
+export const changeArrToObj = (arr) => {
+  let obj = {};
+  arr.forEach((item) => {
+    obj = { ...obj, [item]: item };
+  });
+  return obj;
+};

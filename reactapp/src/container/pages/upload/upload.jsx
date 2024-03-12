@@ -4,18 +4,23 @@ import { Grid } from "../../../components/tailwind/tailwind_variable";
 import Container from "../../../layout/container/container";
 import UploadCard from "./uploadCards/uploadCard";
 import { uploadFiles } from "../../../utils/api/api/fileAPI";
-import * as XLSX from "xlsx";
-import { extractHeader } from "../../../components/functions/parseFunctions";
+import {
+  changeArrToObj,
+  extractHeader,
+} from "../../../components/functions/parseFunctions";
+import ModifiedNameTable from "./modifiedNameTable/modifiedNameTable";
 
 const Upload = () => {
   const navigate = useNavigate();
 
   const [cardArr, setCardArr] = useState([
-    { color: "red", addComp: false, file: null, headers: [] },
+    { color: "red", addComp: false, file: null, fileName: "", headers: {} },
     // { color: "blue", addComp: false, file: null , headers:[]},
     // { color: "yellow", addComp: false, file: null, headers:[] },
-    { color: "green", addComp: true, file: null },
+    { color: "green", addComp: true, file: null, fileName: "", headers: {} },
   ]);
+
+  const [fileLengthArr, setFileLengthArr] = useState([]);
 
   const [clientInfo, setClientInfo] = useState({
     clientName: "",
@@ -57,17 +62,34 @@ const Upload = () => {
 
   const handleFiletoState = ({ index, file }) => {
     console.log(index);
+
     //use the file given here by dragNdrop Upload component to extract headers and insert it to cardArray state
     extractHeader({ excelFile: file })
       .then((resp) => {
-        console.log(resp);
+        console.log("the headers are", resp);
+        //change header from arr format to obj {orginal:modified_name}
+        let objHeaders = changeArrToObj(resp);
+        //push index of selected file
         setCardArr((prevState) => {
           let cardArray = [...prevState];
           cardArray[index].file = file;
+          cardArray[index].headers = objHeaders;
           return cardArray;
+        });
+        //push array
+        setFileLengthArr((prevArr) => {
+          let arr = [...prevArr];
+          arr.push(index);
+          return arr;
         });
       })
       .catch((error) => {
+        //remove index of unselected file
+        setFileLengthArr((prevArr) => {
+          let arr = [...prevArr];
+          let filterArr = arr.filter((item) => item != index);
+          return filterArr;
+        });
         console.log(error);
       });
   };
@@ -164,21 +186,30 @@ const Upload = () => {
               />
             ))}
           </Grid>
+          {/*----------------------------- table -------------------------- */}
+          {/* {fileLengthArr.length > 0 && cardArr.map((comp, index) => comp?.headers && Object.keys(comp.headers).map((key)=><>{key}<div>{comp.headers[key]}</div></>) } */}
+          {fileLengthArr.length > 0 &&
+            cardArr.map(
+              (comp, index) =>
+                comp?.headers && (
+                  <ModifiedNameTable headers={comp.headers} index={index} />
+                )
+              // Object.keys(comp.headers).map((key) => (
+              //   <>
+              //     {key}
+              //     <div>{comp.headers[key]}</div>
+              //   </>
+              // ))
+            )}
+          <button
+            type="submit"
+            onClick={(e) => handleFileSubmit(e)}
+            className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
+          >
+            Submit
+          </button>
         </Container>
-        <button
-          type="submit"
-          onClick={(e) => handleFileSubmit(e)}
-          className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
-        >
-          Submit
-        </button>
       </form>
-      {/* <Link
-        to="/logic/compform"
-        className="inline-block px-8 py-4 bg-blue-500 text-white rounded-[24px]"
-      >
-        Upload
-      </Link> */}
     </div>
   );
 };
