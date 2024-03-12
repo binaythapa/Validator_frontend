@@ -15,8 +15,8 @@ const Upload = () => {
 
   const [cardArr, setCardArr] = useState([
     { color: "red", addComp: false, file: null, fileName: "", headers: {} },
-    // { color: "blue", addComp: false, file: null , headers:[]},
-    // { color: "yellow", addComp: false, file: null, headers:[] },
+    // { color: "blue", addComp: false, file: null , fileName: "", headers: {}},
+    // { color: "yellow", addComp: false, file: null, fileName: "", headers: {} },
     { color: "green", addComp: true, file: null, fileName: "", headers: {} },
   ]);
 
@@ -73,6 +73,7 @@ const Upload = () => {
         setCardArr((prevState) => {
           let cardArray = [...prevState];
           cardArray[index].file = file;
+          cardArray[index].fileName = file.name;
           cardArray[index].headers = objHeaders;
           return cardArray;
         });
@@ -151,36 +152,53 @@ const Upload = () => {
     });
   };
 
+  const handleFileNameChange = ({ event, index }) => {
+    setCardArr((prevCardArr) => {
+      let arr = [...prevCardArr];
+      arr[index].fileName = event.target.value;
+      return arr;
+    });
+  };
+
   return (
     <div className="bg-[#F4F5FA] pt-4 min-h-screen">
       <form>
         <Container>
           <div className="text-3xl font-bold mb-6 mt-2">Upload File</div>
           <Grid grid12>
-            <label className="mb-4 p-1 text-[1.12rem] font-medium lg:col-span-6 md:col-span-12">
+            <label className="mb-4 p-1 text-[1.12rem] font-medium lg:col-span-5 md:col-span-12">
               Client Name:
               <input
                 type="text"
                 name="clientName"
                 value={clientInfo.clientName}
                 onChange={(e) => handleClientInfo(e, "clientName")}
-                className="shadow-sm rounded-md w-[400px] ml-3 px-3 py-2 border border-gray-300 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="shadow-sm rounded-md w-9/12 ml-3 my-2 px-3 py-2 border border-gray-300 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Client Name"
                 required
               />
             </label>
-            <label className="mb-4 text-[1.12rem] font-medium lg:col-span-6 md:col-span-12">
+            <label className="mb-4 text-[1.12rem] font-medium lg:col-span-5 md:col-span-12">
               Client Alias:
               <input
                 type="text"
                 name="clientAlias"
                 value={clientInfo.clientAlias}
                 onChange={(e) => handleClientInfo(e, "clientAlias")}
-                className="shadow-sm rounded-md w-[400px] ml-3 px-3 py-2 border border-gray-300 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                className="shadow-sm rounded-md w-9/12  ml-3 my-2 px-3 py-2 border border-gray-300 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                 placeholder="Client Alias"
                 required
               />
             </label>
+            <div className="lg:col-span-2 md:col-span-12">
+              <button
+                type="submit"
+                onClick={(e) => handleFileSubmit(e)}
+                className="m-auto mx-3 my-2 hover:bg-indigo-700 transition ease-in w-[200px] py-3 text-xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px]"
+              >
+                Submit
+              </button>
+            </div>
           </Grid>
           <Grid grid12>
             {cardArr.map((c, i) => (
@@ -202,7 +220,9 @@ const Upload = () => {
                 (Object.keys(comp?.headers)?.length > 0) &
                   fileLengthArr.includes(index) && (
                   <ModifiedNameTable
+                    fileName={comp.fileName}
                     handleModifiedName={handleModifiedName}
+                    handleFileNameChange={handleFileNameChange}
                     headers={comp.headers}
                     index={index}
                   />
@@ -214,13 +234,15 @@ const Upload = () => {
               //   </>
               // ))
             )}
-          <button
-            type="submit"
-            onClick={(e) => handleFileSubmit(e)}
-            className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
-          >
-            Submit
-          </button>
+          {fileLengthArr.length > 0 && (
+            <button
+              type="submit"
+              onClick={(e) => handleFileSubmit(e)}
+              className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
+            >
+              Submit
+            </button>
+          )}
         </Container>
       </form>
     </div>
