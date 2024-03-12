@@ -103,6 +103,7 @@ const Upload = () => {
       (c) => c.file !== null && c.file !== undefined
     );
     let sendArr = [];
+    let updatedSendArr = [];
     //client array
     let clientData = { ...clientInfo };
     let client_name = clientData.clientName;
@@ -117,7 +118,9 @@ const Upload = () => {
 
       filterFileFromCardArr.forEach((content) => {
         let file = content.file;
-        let title = content.file.name;
+        let title = content.fileName;
+
+        let headerJson = content.headers;
 
         sendArr.push({
           client_name,
@@ -125,11 +128,20 @@ const Upload = () => {
           title,
           file,
         });
-      });
-      console.log(filterFileFromCardArr);
-      console.log(sendArr);
 
-      //################# API ##############
+        updatedSendArr.push({
+          client_name,
+          client_alias,
+          title,
+          file,
+          headerJson,
+        });
+      });
+      // console.log(filterFileFromCardArr);
+      console.log(sendArr);
+      console.log("the updated send array is", updatedSendArr);
+
+      //ppbb ################# API ##############
       // try {
       //   let resp = await uploadFiles({ formData: sendArr });
       //   if (resp.status === 200) {
