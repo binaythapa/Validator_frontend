@@ -16,9 +16,9 @@ const ModifiedNameTable = ({
   return (
     <div className="max-w-screen-xl mx-auto px-4 md:px-8 mt-10 mb-5">
       <div className="max-w-lg">
-        <h3 className="text-gray-800 text-xl font-bold sm:text-2xl mb-5">
+        {/* <h3 className="text-gray-800 text-xl font-bold sm:text-2xl mb-5">
           Headers for sheet no {index + 1}
-        </h3>
+        </h3> */}
         {/* -------- filename ---------- */}
         <label className="mb-5 mt-5 p-1 text-[1.06rem] font-medium lg:col-span-6 md:col-span-12">
           File Name:

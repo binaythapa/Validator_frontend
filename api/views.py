@@ -33,30 +33,30 @@ class TestRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
         obj = get_object_or_404(queryset, pk=self.kwargs.get('pk'))
         return obj
 
+# not used 
+# class FileUploadView(APIView):
+#     def get(self, request):
+#         # Retrieve all files from the database
+#         files = File.objects.all()
 
-class FileUploadView(APIView):
-    def get(self, request):
-        # Retrieve all files from the database
-        files = File.objects.all()
+#         # Create a dictionary to hold file titles and their corresponding paths
+#         file_info = {}
+#         for file in files:
+#             file_info[file.title] = file.file.url
 
-        # Create a dictionary to hold file titles and their corresponding paths
-        file_info = {}
-        for file in files:
-            file_info[file.title] = file.file.url
+#         # Return the dictionary of file titles and paths in the response
+#         return JsonResponse({'files': file_info})
 
-        # Return the dictionary of file titles and paths in the response
-        return JsonResponse({'files': file_info})
-
-    def post(self, request):
-        if 'file' in request.FILES:
-            uploaded_file = request.FILES['file']
-            # Extracting title from POST data
-            title = request.POST.get('title', '')
-            file_instance = File(title=title, file=uploaded_file)
-            file_instance.save()
-            return JsonResponse({'message': 'File uploaded successfully', 'file_title': title})
-        else:
-            return JsonResponse({'error': 'No file found'}, status=400)
+#     def post(self, request):
+#         if 'file' in request.FILES:
+#             uploaded_file = request.FILES['file']
+#             # Extracting title from POST data
+#             title = request.POST.get('title', '')
+#             file_instance = File(title=title, file=uploaded_file)
+#             file_instance.save()
+#             return JsonResponse({'message': 'File uploaded successfully', 'file_title': title})
+#         else:
+#             return JsonResponse({'error': 'No file found'}, status=400)
 
 
 class FileUploadAPI(generics.ListCreateAPIView):
@@ -110,7 +110,7 @@ class FileUploadAPI(generics.ListCreateAPIView):
         #     return Response(serializer.data, status=status.HTTP_201_CREATED)
         # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+# used for posting data only 
 class ClientView(generics.ListCreateAPIView):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
@@ -161,7 +161,16 @@ class ClientAPIView(APIView):
                 "client_name": "All",
                 "api_list": api_list
             })
+ 
+    def get_all_client_name(self, request):
+        clientName = Client.objects.values_list('client_name',flat=True).distinct()
+        print(clientName)
 
+        
+
+
+
+        
 
 # USED multiple model to save data from single API
 class FormAPIView(APIView):

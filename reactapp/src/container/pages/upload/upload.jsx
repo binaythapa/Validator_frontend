@@ -176,7 +176,7 @@ const Upload = () => {
     <div className="bg-[#F4F5FA] pt-4 min-h-screen">
       <form>
         <Container>
-          <div className="text-3xl font-bold mb-6 mt-2">Upload File</div>
+          <div className="text-[1.56rem] font-bold mb-6 mt-2">Upload File</div>
           <Grid grid12>
             <label className="mb-4 p-1 text-[1.12rem] font-medium lg:col-span-5 md:col-span-12">
               Client Name:
@@ -250,7 +250,7 @@ const Upload = () => {
             <button
               type="submit"
               onClick={(e) => handleFileSubmit(e)}
-              className="m-auto my-6 hover:bg-indigo-700 transition ease-in w-[200px] py-4 text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
+              className="m-auto mt-5 mb-8 hover:bg-indigo-700 transition ease-in w-[200px] py-[12px] text-2xl font-bold flex justify-center bg-indigo-600 text-white rounded-[10px] mt-[40px]"
             >
               Submit
             </button>

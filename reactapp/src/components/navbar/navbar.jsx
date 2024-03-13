@@ -4,7 +4,7 @@ import { Button } from "../tailwind/tailwind_variable";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const { jwtInfo, logOutAll } = useContext(AuthContext);
+  const { jwtInfo } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,8 +33,6 @@ const Navbar = () => {
                     // to="/logic"
                     to="http://localhost:3000/logic"
                     className={isHome ? inActiveClass : activeClass}
-                    end
-                    exact
                   >
                     Home
                   </NavLink>
@@ -50,9 +48,14 @@ const Navbar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <a className="hover:text-gray-700" href="#">
-                    Collections
-                  </a>
+                  <NavLink
+                    to="/logic/compform"
+                    className={({ isActive }) =>
+                      isActive ? inActiveClass : activeClass
+                    }
+                  >
+                    Add Info
+                  </NavLink>
                 </li>
                 <li>
                   <a className="hover:text-gray-700" href="#">
