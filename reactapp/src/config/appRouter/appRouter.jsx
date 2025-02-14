@@ -16,26 +16,26 @@ const logicPaths = [
   {
     path: "",
     element: (
-      <ProtectedAppRoute>
+      
         <Info />
-      </ProtectedAppRoute>
+      
     ),
   },
   {
     path: "upload",
     element: (
-      <ProtectedAppRoute>
+      
         <Upload />
-      </ProtectedAppRoute>
+     
     ),
   },
   {
     path: "compform",
     element: (
-      <ProtectedAppRoute>
-        {" "}
+     
+      
         <Comparison />
-      </ProtectedAppRoute>
+      
     ),
   },
 ];
